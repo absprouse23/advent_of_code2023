@@ -1,5 +1,5 @@
 # Advent of Code 2023
-# Challenge 1
+# Challenge 1 Part 2
 # Aaron Sprouse
 
 calbiration_sum = 0
