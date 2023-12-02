@@ -1,19 +1,14 @@
 # Advent of Code 2023
-# Challenge 2 Part 1
+# Challenge 2 Part 2
 # https://adventofcode.com/2023/day/2
 # Aaron Sprouse
 
 import re
 
 INPUT_FILE = 'input.txt'
-POSSIBLE_GAMES = {
-    "red":12,
-    "green":13,
-    "blue":14,
-}
 
 games = []
-id_sum = 0
+power_sum = 0
 
 with open(INPUT_FILE, "r") as file:
     for game in file:
@@ -32,21 +27,20 @@ with open(INPUT_FILE, "r") as file:
         games.append(result)
 
 for game in games:
-    game_valid = True
+    red = 0
+    green = 0
+    blue = 0
     for pull in game:
         for color in pull:
-            if POSSIBLE_GAMES[color] < pull[color]:
-                game_valid = False
-                break
-            else:
-                continue
+            if (color == "red") and (pull[color] > red):
+                red = pull[color]
+            elif (color == "green") and (pull[color] > green):
+                green = pull[color]
+            elif (color == "blue") and (pull[color] > blue):
+                blue = pull[color]
+            
+    game_power = red * green * blue
 
-    print(f"Is game {(games.index(game) + 1)} valid? {game_valid}")
-    if game_valid:
-        id_sum += (games.index(game) + 1)
-    else:
-        continue
+    power_sum += game_power
 
-print(id_sum)
-
-# [{'red': 12, 'green': 9}, {'red': 12}, {'red': 9, 'green': 3}, {'red': 8, 'blue': 4, 'green': 4}, {'blue': 8, 'red': 11, 'green': 2}, True]
+print(power_sum)
